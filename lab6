@@ -1,0 +1,111 @@
+;;;; Lucas Mehmel
+;;;; CSC 351 Lab6
+;;;;
+
+
+;;;
+;;; average3
+;;;
+
+;; takes the average of three numbers
+
+(defun average3 (x y z)
+		(/ (+ x y z) 3)
+) 
+
+;;;
+;;; sum-list 
+;;;
+
+;; adds all elements in a list
+
+(defun sum-list (theList)
+			(if (null theList) 0
+			      (+ (car theList) (sum-list(cdr theList)))
+			)	
+)
+
+
+;;;
+;;; average-list 
+;;;
+
+;;takes the average of a list of numbers
+
+(defun average-list (theList)
+			(if (null theList) theList
+				(/ (sum-list theList) (length theList))
+			)
+)
+
+
+;;;
+;;; reverse-rest
+;;;
+
+;; reverses all but the the first item on a list
+
+(defun reverse-rest (theList)
+			(if (null theList) theList
+			  	(append (list(car theList)) (reverse-help (cdr theList)))
+			)
+)
+
+;;;
+;;; reverse-help
+;;;
+
+;; helper method for reverse-rest that does the reverseing of the list
+
+(defun reverse-help (theList)
+			(cond ((null theList) 0)
+				((= (length thelist) 1) (list(car theList)))
+				(t (append (reverse-help (cdr theList)) (list(car theList)))) 
+			)
+)
+
+
+;;;
+;;; insert-it
+;;;
+
+;; takes an integer and a list and inserts the int into the list numerically
+
+(defun insert-it (int theList)
+			(cond ((null theList) (list int))
+				((< int (car theList)) (append (list int) theList))
+				(t (append (list(car theList)) (insert-it int (cdr theList))))
+			)
+)
+
+
+;;;
+;;; insertion-sort
+;;;
+
+;; takes a list and returns it in increasing order
+
+(defun insertion-sort (theList)
+			(if (null theList) nil 
+				(append (insert-it (car theList)(insertion-sort (cdr theList))))
+			)
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

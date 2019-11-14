@@ -1,0 +1,98 @@
+;;;;
+;;;;Lucas Mehmel
+;;;;CSC 351L Lab7
+;;;;
+
+;;;
+;;; headlist
+;;;
+
+;; when given a list of sublists, this function will return the first element of each sublist
+
+(defun headList (theList)
+		(mapcar #'car theList ) 
+)
+
+;;;
+;;;lastElement
+;;;
+
+;; returns the last element in a list
+
+(defun lastElement (theList)
+			(if (= (length theList) 1) (car theList)
+				(lastElement (cdr theList))
+			)
+)
+
+;;;
+;;;allButLast
+;;;
+
+;; returns all elements except the last one
+
+(defun allButLast (theList)
+			(if (= (length theList) 1) nil
+				(append (list(car theList)) (allButLast (cdr theList)))
+			)
+)
+
+;;;
+;;; tailList
+;;;
+
+;; takes a list with sublists and will returns a list of the last elements
+
+(defun tailList (theList)
+		(mapcar #'lastElement theList)
+)
+
+;;;
+;;; removeApair
+;;;
+
+;; takes a list of atoms and returns a list with the first pair adjacent matching symbols removed
+
+(defun removeApair (theList) 
+			(if (string-equal (car theList) (cadr theList)) (cddr theList)
+				(append (list(car theList)) (removeApair (cdr theList)))
+			)
+)
+
+
+;;;
+;;; removePairs
+;;;
+
+;; removes all pairs in a list
+
+(defun removePairs (theList)
+			(if (equal theList (removeApair theList )) theList
+				(removePairs( removeApair theList))
+			)
+)
+
+
+;;;
+;;; rotate
+;;;
+
+;; rotates a list to the right one place
+
+(defun rotate (theList)
+		(append (list (lastElement theList)) (allButLast theList))
+)
+
+
+;;;
+;;; spin
+;;;
+
+;; takes a number and a list and rotates the list to the right the number of times the number is
+
+(defun spin (theList num)
+		(do ((i num (- i 1)))
+			((= i 0) theList)
+			(setf theList (rotate theList))
+		)
+)

@@ -1,0 +1,90 @@
+;;;;
+;;;; Lucas Mehmel
+;;;; CSC351 Lab8
+;;;;
+
+;;; Recursive power func
+;;  calculates the X^i only using recursion
+
+(defun recursive-power (num power)
+		(if (= power 0) 1
+			(* num (recursive-power num (- power 1)))
+		)
+)
+
+;;; power function 
+;;  calculates the X^i without using recursion
+
+(defun power-func (num power)
+		(setf theList())
+		(do ((p power (- p 1)))
+			((= p 0)( eval(cons '* theList) ))
+			(setf theList(cons num theList))
+		)
+)
+
+
+;;; small-larg
+;;  gets the smallest and the largest element of a list
+
+(defun small-larg (theList)
+		(append (list(small theList)) (list(larg theList)))
+)
+
+;;; small
+;; gets the smallest element of the list
+
+(defun small (theList)
+		(cond ((null theList) nil)
+			((= (length theList) 1) (car theList))
+			((> (car theList) (cadr theList)) (small (cdr theList)))
+			(t( small (append (list(car theList)) (cddr theList))))
+		)
+)
+
+;;; larg
+;; get the largest element in a list
+
+(defun larg (theList)
+		(cond ((null theList) nil)
+			((= (length theList) 1) (car theList))
+			((< (car theList) (cadr theList)) (larg (cdr theList)))
+			(t( larg (append (list(car theList)) (cddr theList))))
+		)
+)
+
+;;; small-large-re
+;;  gets the smallest and the largest elements in a list recursively
+
+(defun small-large-re (theList)
+		(cond ((null theList) nil)
+			((= (length theList) 1) (cons (car theList) theList))
+			((= (length theList) 2) theList)
+			((> (car theList) (cadr theList)) 
+				(small-large-re (cons (cadr theList) (cons (car theList) (cddr theList)))))
+			((> (car thelist) (caddr theList))
+				(small-large-re (cons (caddr theList) (cdr theList))))
+			((< (cadr theList) (caddr theList))
+				(small-large-re (cons (car theList) (cddr theList))))
+			(t(small-large-re (cons (car theList) (cons (cadr theList) (cdddr theList)))))
+		)
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
